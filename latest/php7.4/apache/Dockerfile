@@ -21,6 +21,12 @@ RUN set -ex; \
 	savedAptMark="$(apt-mark showmanual)"; \
 	\
 	apt-get update; \
+	
+	# Install Postgre PDO
+        apt-get install -y libpq-dev \
+    	&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    	&& docker-php-ext-install pdo pdo_pgsql pgsql; \
+    
 	apt-get install -y --no-install-recommends \
 		libfreetype6-dev \
 		libjpeg-dev \
